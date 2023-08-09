@@ -1,0 +1,23 @@
+<%= form_for @booking do |form| %>
+  <% @flight = Flight.find(params[:flight_id]) %> 
+  
+  <h2>Flight Details:</h2>
+  <p>Departure: <%= @flight.departure_airport.code %></p>
+  <p>Arrival: <%= @flight.arrival_airport.code %></p>
+  <p>Date: <%= @flight.start_datetime.strftime("%B %e, %Y") %></p>
+  <p>Duration: <%= @flight.duration %> hours</p>
+
+  <%= form.fields_for :passengers do |passenger_form| %>
+    <h2>Passenger <%= passenger_form.index + 1 %> Information:</h2>
+    <div>
+      <%= passenger_form.label :name, "Name" %>
+      <%= passenger_form.text_field :name %>
+    </div>
+    <div>
+      <%= passenger_form.label :email, "Email" %>
+      <%= passenger_form.text_field :email %>
+    </div>
+  <% end %>
+
+  <%= form.submit "Book Flight" %>
+<% end %>
