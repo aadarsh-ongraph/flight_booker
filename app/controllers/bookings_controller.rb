@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    debugger
+
     @booking = Booking.new(booking_params)
     if @booking.save
       redirect_to @booking
@@ -19,5 +19,6 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email])
+   # params.require(:booking).permit(params[:id], passengers_attributes: [:name, :email])
   end
 end

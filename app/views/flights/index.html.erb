@@ -1,3 +1,20 @@
+
+<%= form_with(url: '/flights', method: :get, class: 'form-container') do |form| %>
+  <%= form.label :departure_airport_id, 'Departure Airport', class: 'form-label' %>
+  <%= form.select :departure_airport_id, options_from_collection_for_select(@airports, 'id', 'code'), class: 'form-select' %>
+
+  <%= form.label :arrival_airport_id, 'Arrival Airport', class: 'form-label' %>
+  <%= form.select :arrival_airport_id, options_from_collection_for_select(@airports, 'id', 'code'), class: 'form-select' %>
+
+  <%= form.label :passenger_count, 'Number of Passengers', class: 'form-label' %>
+  <%= form.select :passenger_count, options_for_select([1, 2, 3, 4]), class: 'form-select' %>
+
+  <%= form.label :flight_date, 'Flight Date', class: 'form-label' %>
+  <%= form.select :flight_date, options_from_collection_for_select(@available_dates, :to_s, :to_s), class: 'form-select' %>
+  <%= form.submit 'Search Flights', class: 'form-submit' %>
+<% end %>
+
+
 <h1>Available Flights</h1>
 
 <table>
@@ -17,7 +34,7 @@
         <td><%= flight.arrival_airport.code %></td>
         <td><%= flight.start_datetime.strftime('%B %e, %Y %I:%M %p') %></td>
         <td><%= flight.duration %> hours</td>
-        <td><%= link_to "Book Now", new_booking_path(flight_id: flight.id), class: "book-now-button" %></td>
+       <td><%= link_to "Book Now", new_booking_path(flight_id: flight.id), class: "book-now-button" %> </td>
       </tr>
     <% end %>
   </tbody>
